@@ -1,0 +1,87 @@
+# This pipeline performs the actions below
+#### On anything
+## run npm validation:
+#### dependency scan
+#### lint
+#### test
+#### build
+
+
+variables:
+  TEAM_NAME: # TBD
+  ARTIFACTORY_URL: artifactory-rco.centene.com
+  ARTIFACTORY_REGISTRY: $ARTIFACTORY_URL/artifactory/$TEAM_NAME_nonprod_local_rco
+  PROJECT_VERSION: '1.0.6' #SemVer Tag used for Artifactory image tag and Helm Chart Version
+  CI_FILE_PATH: '.gitlab-ci.yml' #Path to your .gitlab-ci.yml file
+  VERSION_TYPE: 'minor' #SemVer major or minor incrementation of Project Version above
+  #UNIT_TEST_IMAGE: artifactory-rco.centene.com/dockerhub_docker_remote_rco/node:17
+  UNIT_TEST_IMAGE: artifactory-rco.centene.com/dockerhub_docker_remote_rco/cypress/browsers:node16.14.2-slim-chrome103-ff102
+  E2E_TEST_IMAGE: artifactory-rco.centene.com/dockerhub_docker_remote_rco/node:16
+  LINT_IMAGE: artifactory-rco.centene.com/dockerhub_docker_remote_rco/node:16
+  BUILD_IMAGE: artifactory-rco.centene.com/dockerhub_docker_remote_rco/node:16
+
+
+default:
+  tags:
+    - rco-prodbuild-01-k8s
+
+include:
+  - local: '/templates/security-scan.yml'
+  - local: '/templates/test.yml'
+
+stages:
+  ### skipping the test stage for now: ui has no tests yet
+  ### test
+  ### skipping the scan stage for now: start with minimal success, then enhance
+  ### - scan
+  - build
+
+### global template functions that will run without need for changes
+#unit-test:
+#  extends: .unit-test
+#  before_script:
+#    - npm config set #@<Team's registry here>:registry=https://gitlab.centene.com/api/v4/projects/${REGISTRY_ID}/packages/npm/
+#    - npm config set -- '//gitlab.centene.com/api/v4/projects/${REGISTRY_ID}/packages/npm/:_authToken' "${REGISTRY_READ_TOKEN}"
+#    - npm config set strict-ssl false
+#  script:
+#    - npm install --unsafe-perm
+#    - npm rebuild node-sass
+#    - npm run test
+#  coverage: /All files[^|]*\|[^|]*\s+([\d\.]+)/
+#  artifacts:
+#    paths:
+#      - coverage/
+
+#lint-scan:
+#  extends: .lint-test
+#  before_script:
+#    - npm config set #@<Team's registry here>:registry=https://gitlab.centene.com/api/v4/projects/${REGISTRY_ID}/packages/npm/
+#    - npm config set -- '//gitlab.centene.com/api/v4/projects/${REGISTRY_ID}/packages/npm/:_authToken' "${REGISTRY_READ_TOKEN}"
+#    - npm config set strict-ssl false
+#
+#sonarqube-scan:
+#  extends: .sonarqube-scan
+
+npm-build:
+  stage: build
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "PIRP*"'
+  retry:
+    max: 2
+    when:
+      - runner_system_failure
+      - stuck_or_timeout_failure
+  #  before_script:
+  #    - npm config set @trucare-cloud:registry=https://gitlab.centene.com/api/v4/projects/${REGISTRY_ID}/packages/npm/
+  #    - npm config set -- '//gitlab.centene.com/api/v4/projects/${REGISTRY_ID}/packages/npm/:_authToken' "${REGISTRY_READ_TOKEN}"
+  #    - npm run-script setConfig:onprem
+  #    - npm config set strict-ssl false
+  script:
+    #    - npm install --unsafe-perm
+    - npm ci
+    #    - npm rebuild node-sass
+    #    - npm run package
+    - npm run build
+  artifacts:
+    paths:
+      - dist/

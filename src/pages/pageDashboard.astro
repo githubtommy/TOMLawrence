@@ -1,0 +1,17 @@
+---
+import LayoutHeader from '../layouts/LayoutHeader.astro';
+import VendorTable from '../layouts/layoutClaimsTable.astro';
+import DashboardTable from '../components/dashboardTable/DashboardTable.jsx'
+import '../styles/global.css'
+---
+
+<LayoutHeader />
+<h1>List Page</h1>
+<p>The table below is a React component. Very basic at this point.</p>
+<DashboardTable client:load />
+
+
+
+<script>
+  console.log('Hello from the list page!');
+</script>

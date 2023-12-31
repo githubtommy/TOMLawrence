@@ -1,0 +1,334 @@
+//@import '@centene/kds-angular-ui/styles/core.scss';
+@use '../styles/core.scss';
+
+////////////////
+//// Button ////
+////////////////
+
+// NOTE: secondary token with hover/active/disabled here
+// NOTE: error token with hover/active/disabled here
+
+// :root {
+//     // general
+//     --kdsButton-border-radius: var(--kds-theme-border-radius);
+//     --kdsButton-text-color: var(--kds-theme-secondary);
+//     --kdsButton-text-color-focus: var(--kds-theme-secondary-focus);
+//     --kdsButton-text-color-hover: var(--kds-theme-secondary-hover);
+//     --kdsButton-text-color-active: var(--kds-theme-secondary-active);
+//     --kdsButton-text-color-disabled: var(--kds-theme-secondary-disabled);
+
+//     // contained
+//     --kdsButton-contained-background-color: var(--kds-theme-secondary);
+//     --kdsButton-contained-background-color-hover: var(--kds-theme-secondary-hover);
+//     --kdsButton-contained-background-color-active: var(--kds-theme-secondary-active);
+//     --kdsButton-contained-background-color-disabled: var(--kds-theme-secondary-disabled);
+//     --kdsButton-contained-text-color: var(--kds-theme-on-secondary);
+
+//     // destructive
+//     --kdsButton-destructive-text-color: var(--kds-theme-error);
+//     --kdsButton-destructive-text-color-focus: var(--kds-theme-error-focus);
+//     --kdsButton-destructive-text-color-hover: var(--kds-theme-error-hover);
+//     --kdsButton-destructive-text-color-active: var(--kds-theme-error-active);
+//     --kdsButton-destructive-text-color-disabled: var(--kds-theme-error-disabled);
+//     --kdsButton-destructive-contained-background-color: var(--kds-theme-error);
+//     --kdsButton-destructive-contained-background-color-hover: var(--kds-theme-error-hover);
+//     --kdsButton-destructive-contained-background-color-active: var(--kds-theme-error-active);
+//     --kdsButton-destructive-contained-background-color-disabled: var(--kds-theme-error-disabled);
+//     --kdsButton-destructive-contained-text-color: var(--kds-theme-on-error);
+// }
+
+/* stylelint-disable property-disallowed-list -- outline is managed by Halo */
+.pirp-button {
+  background-color: green;
+  border-color: transparent;
+  border-radius: var(
+          --kds-button-border-radius,
+          var(--kds-theme-border-radius)
+  );
+  border-style: solid;
+  border-width: var(--kds-theme-halo-width);
+  cursor: pointer;
+  display: inline-flex;
+  font-family: var(--kds-theme-typography-font-family);
+  margin: 0 var(--kds-theme-halo-offset);
+  padding: 0;
+  position: relative;
+  text-decoration: none;
+  text-transform: none;
+  transition-duration: 150ms;
+  transition-property: box-shadow;
+  transition-timing-function: ease-out;
+
+  svg {
+    fill: currentColor;
+    height: auto;
+  }
+
+  &[disabled] {
+    cursor: not-allowed;
+  }
+
+  &:focus {
+    @include core.kds-halo;
+    outline: 0;
+  }
+}
+/* stylelint-enable property-disallowed-list */
+
+// Extra wrapper to create halo focus effect
+.kds-button__inner {
+  align-items: center;
+  border-radius: var(
+          --kds-button-border-radius,
+          var(--kds-theme-border-radius)
+  );
+  box-sizing: border-box;
+  display: flex;
+  transition-duration: 150ms;
+  transition-property: background-color;
+  transition-timing-function: ease;
+  width: 100%;
+
+  // NOTE: text nodes are wrapped in <span>
+  // General rules for icons and text nodes
+  > * + * {
+    margin-left: 0.5rem;
+  }
+}
+
+///////////////////////
+//// Size Variants ////
+///////////////////////
+
+.kds-button--extra-small {
+  font-size: var(--kds-theme-typography-label-xs-font-size);
+  font-weight: var(--kds-theme-typography-label-xs-font-weight);
+  line-height: var(--kds-theme-typography-label-xs-line-height);
+
+  .kds-button__inner {
+    min-height: 30px;
+    padding: 8px 12px;
+  }
+
+  svg {
+    width: 16px;
+  }
+}
+
+.kds-button--small {
+  font-size: var(--kds-theme-typography-label-s-font-size);
+  font-weight: var(--kds-theme-typography-label-s-font-weight);
+  line-height: var(--kds-theme-typography-label-s-line-height);
+
+  .kds-button__inner {
+    min-height: 38px;
+    padding: 8px 16px;
+  }
+
+  svg {
+    width: 20px;
+  }
+}
+
+.kds-button--medium {
+  font-size: var(--kds-theme-typography-label-m-font-size);
+  font-weight: var(--kds-theme-typography-label-m-font-weight);
+  line-height: var(--kds-theme-typography-label-m-line-height);
+
+  .kds-button__inner {
+    min-height: 48px;
+    padding: 12px 28px;
+  }
+
+  svg {
+    width: 24px;
+  }
+}
+
+.kds-button--large {
+  font-size: var(--kds-theme-typography-label-l-font-size);
+  font-weight: var(--kds-theme-typography-label-l-font-weight);
+  line-height: var(--kds-theme-typography-label-l-line-height);
+
+  .kds-button__inner {
+    min-height: 56px;
+    padding: 14px 28px;
+  }
+
+  svg {
+    width: 28px;
+  }
+}
+
+///////////////////////////
+//// Contained Variant ////
+///////////////////////////
+
+.kds-button--contained {
+  color: var(--kds-button-contained-text-color, var(--kds-theme-on-secondary));
+
+  .kds-button__inner {
+    background-color: var(
+            --kds-button-contained-background-color,
+            var(--kds-theme-secondary)
+    );
+  }
+
+  &:focus .kds-button__inner {
+    background-color: var(
+            --kds-button-contained-background-color,
+            var(--kds-theme-secondary)
+    );
+  }
+
+  &:hover .kds-button__inner {
+    background-color: var(
+            --kds-button-contained-background-color-hover,
+            var(--kds-theme-secondary-hover)
+    );
+  }
+
+  &:active .kds-button__inner {
+    background-color: var(
+            --kds-button-contained-background-color-active,
+            var(--kds-theme-secondary-active)
+    );
+  }
+
+  &[disabled] .kds-button__inner {
+    background-color: var(
+            --kds-button-contained-background-color-disabled,
+            var(--kds-theme-secondary-disabled)
+    );
+  }
+}
+
+//////////////////////
+//// Text Variant ////
+//////////////////////
+
+.kds-button--text {
+  color: var(--kds-button-text-color, var(--kds-theme-secondary));
+
+  &:focus {
+    color: var(--kds-button-text-color-focus, var(--kds-theme-secondary-focus));
+  }
+
+  &:hover {
+    color: var(--kds-button-text-color-hover, var(--kds-theme-secondary-hover));
+  }
+
+  &:active {
+    color: var(
+            --kds-button-text-color-active,
+            var(--kds-theme-secondary-active)
+    );
+  }
+
+  // NOTE: text nodes are wrapped in <span>
+  &:focus .kds-button__inner span {
+    text-decoration: none;
+  }
+
+  &:hover .kds-button__inner span,
+  &:active .kds-button__inner span {
+    text-decoration: underline;
+  }
+
+  &[disabled] {
+    color: var(
+            --kds-button-text-color-disabled,
+            var(--kds-theme-secondary-disabled)
+    );
+
+    .kds-button__inner {
+      background-color: transparent;
+    }
+
+    &:hover .kds-button__inner span,
+    &:focus .kds-button__inner span,
+    &:active .kds-button__inner span {
+      text-decoration: none;
+    }
+  }
+}
+
+///////////////////////////
+//// Destructive Theme ////
+///////////////////////////
+
+.kds-button--destructive {
+  &.kds-button--text {
+    color: var(--kds-button-destructive-text-color, var(--kds-theme-error));
+
+    &:focus {
+      color: var(
+              --kds-button-destructive-text-color-focus,
+              var(--kds-theme-error-focus)
+      );
+    }
+
+    &:hover {
+      color: var(
+              --kds-button-destructive-text-color-hover,
+              var(--kds-theme-error-hover)
+      );
+    }
+
+    &:active {
+      color: var(
+              --kds-button-destructive-text-color-active,
+              var(--kds-theme-error-active)
+      );
+    }
+
+    &[disabled] {
+      color: var(
+              --kds-button-destructive-text-color-disabled,
+              var(--kds-theme-error-disabled)
+      );
+    }
+  }
+
+  &.kds-button--contained {
+    color: var(
+            --kds-button-destructive-contained-text-color,
+            var(--kds-theme-on-error)
+    );
+
+    .kds-button__inner {
+      background-color: var(
+              --kds-button-destructive-contained-background-color,
+              var(--kds-theme-error)
+      );
+    }
+
+    &:focus .kds-button__inner {
+      background-color: var(
+              --kds-button-destructive-contained-background-color,
+              var(--kds-theme-error)
+      );
+    }
+
+    &:hover .kds-button__inner {
+      background-color: var(
+              --kds-button-destructive-contained-background-color-hover,
+              var(--kds-theme-error-hover)
+      );
+    }
+
+    &:active .kds-button__inner {
+      background-color: var(
+              --kds-button-destructive-contained-background-color-active,
+              var(--kds-theme-error-active)
+      );
+    }
+
+    &[disabled] .kds-button__inner {
+      background-color: var(
+              --kds-button-destructive-contained-background-color-disabled,
+              var(--kds-theme-error-disabled)
+      );
+    }
+  }
+}

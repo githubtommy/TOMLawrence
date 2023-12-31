@@ -1,0 +1,18 @@
+---
+import '../styles/global.css'
+import LayoutHeader from '../layouts/LayoutHeader.astro';
+import ExampleReactButton from '../components/exampleReactButton/ExampleReactButton.jsx';
+import ExampleSimpleReactButton from '../components/exampleSimpleReactButton/ExampleSimpleReactButton.jsx';
+import KdsButton from '../components/kdsButton/KdsButton.jsx';
+
+function handleClick() {
+  console.log('TOMTOM: CLICK');
+}
+---
+
+<LayoutHeader />
+<h1>Study: React Buttons</h1>
+<ExampleReactButton client:load />
+<ExampleSimpleReactButton client:load>Simple React Button</ExampleSimpleReactButton>
+<KdsButton client:load>This is a KDS Button</KdsButton>
+

@@ -1,0 +1,1 @@
+npm/// <reference types="astro/client" />

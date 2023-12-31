@@ -1,0 +1,43 @@
+# Test Driven Development Gitlab CI/CD YAML File
+### Prepare for Unit Test and Perform Unit Tests
+stages:
+  - test
+
+variables:
+  UNIT_TEST_IMAGE: ""
+  LINT_IMAGE: ""
+
+.lint-test:
+  stage: test
+  image:
+    name: $LINT_IMAGE
+    entrypoint: [""]
+  before_script:
+    - ""
+  script:
+    - npm install
+    - npm run lint
+  rules:
+    - if: '($CI_COMMIT_BRANCH == "PIRP*") || ($CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "PIRP*") || ($CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "main")'
+
+.unit-test:
+  ### Fill in with scripts used to perform tests in your specific application/programming language (i.e. npm test, go test, pytest, etc.)
+  stage: scan
+  image:
+    name: $UNIT_TEST_IMAGE
+    entrypoint: [""]
+  before_script:
+    - ""
+  script:
+    - npm install
+    - npm run test
+  coverage: /All files[^|]*\|[^|]*\s+([\d\.]+)/
+  artifacts:
+    paths:
+      - coverage.out
+  needs: []
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"' # Run unit-test every time a merge event happens
+    - if: '$CI_COMMIT_BRANCH == "PIRP*"' # Run unit-test every time a commit event happens to PIRP feature branches
+  tags:
+    - rco-prodbuild-01-k8s

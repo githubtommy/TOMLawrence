@@ -1,0 +1,413 @@
+//////////////////////////////////////
+///// K-T Design Language System /////
+//////////////////////////////////////
+
+@mixin core-styles {
+    /////////////////////
+    ///// K-T COLOR /////
+    /////////////////////
+
+    // K-T HELPER TEXT
+    // NOTE: helper text is never used as a background color
+    --kds-theme-helper-text: #7e8890;
+
+    // K-T THEME PRIMARY
+    --kds-theme-primary: #002444;
+    --kds-theme-on-primary: #fff;
+    --kds-theme-primary-hover: #002444;
+    --kds-theme-primary-focus: #002444;
+    --kds-theme-primary-active: #002444;
+    --kds-theme-primary-disabled: #a0a9b1;
+
+    // K-T THEME SECONDARY
+    --kds-theme-secondary: #0099ef;
+    --kds-theme-on-secondary: #fff;
+    --kds-theme-secondary-hover: #0073b3;
+    --kds-theme-secondary-focus: #0099ef;
+    --kds-theme-secondary-active: #005483;
+    --kds-theme-secondary-disabled: #b2e0fa;
+
+    // K-T THEME TERTIARY
+    --kds-theme-tertiary: #fdb733;
+    --kds-theme-on-tertiary: #fff;
+
+    // K-T THEME BACKGROUND
+    --kds-theme-background: #f7f7f7;
+    --kds-theme-on-background: #002444;
+
+    // K-T THEME SURFACE
+    --kds-theme-surface: #fff;
+    --kds-theme-on-surface: #002444;
+    --kds-theme-on-surface-disabled: #a0a9b1;
+    --kds-theme-surface-hover: #e6e9ec;
+    --kds-theme-surface-focus: #fff;
+    --kds-theme-surface-active: #d6dbe0;
+    --kds-theme-surface-disabled: #f2f4f6;
+
+    // K-T THEME SURFACE-ALT
+    --kds-theme-surface-alt: #e6e9ec;
+    --kds-theme-surface-alt-hover: #d6dbe0;
+    --kds-theme-surface-alt-focus: #e6e9ec;
+    --kds-theme-surface-alt-active: #bfc6cc;
+    --kds-theme-surface-alt-disabled: #f2f4f6;
+
+    // K-T THEME NON-MODAL SURFACE
+    --kds-theme-non-modal-surface: rgb(0 36 68 / 90%);
+    --kds-theme-non-modal-on-surface: #fff;
+
+    // K-T THEME DATA CELLS
+    --kds-theme-cell: #fff;
+    --kds-theme-cell-alt: #f2f4f6;
+    --kds-theme-cell-hover: #e6e9ec;
+    --kds-theme-cell-select: #e0f3fd;
+    --kds-theme-cell-select-hover: #b2e0fa;
+
+    // K-T THEME BORDER
+    --kds-theme-border-color: #d6dbe0;
+    --kds-theme-border-color-hover: #bfc6cc;
+    --kds-theme-border-color-focus: #d6dbe0;
+    --kds-theme-border-color-active: #a0a9b1;
+    --kds-theme-border-color-disabled: #e6e9ec;
+    --kds-theme-border-radius: 5px;
+    --kds-theme-border-width: 2px;
+
+    // K-T THEME DIVIDER
+    --kds-theme-divider-color: #e6e9ec;
+
+    // K-T THEME ERROR
+    --kds-theme-error: #cf1d67;
+    --kds-theme-on-error: #fff;
+    --kds-theme-error-alt: #ffe4ef;
+    --kds-theme-on-error-alt: #cf1d67;
+    --kds-theme-error-hover: #a1154f;
+    --kds-theme-error-focus: #cf1d67;
+    --kds-theme-error-active: #8d003b;
+    --kds-theme-error-disabled: #f1a8c6;
+
+    // K-T THEME SUCCESS
+    --kds-theme-success: #8db734;
+    --kds-theme-on-success: #fff;
+    --kds-theme-success-alt: #edf4dd;
+    --kds-theme-on-success-alt: #8db734;
+    --kds-theme-success-hover: #718d42;
+    --kds-theme-success-focus: #8db734;
+    --kds-theme-success-active: #546b3c;
+    --kds-theme-success-disabled: #cfe0ab;
+
+    // K-T THEME WARNING
+    --kds-theme-warning: #fdb733;
+    --kds-theme-on-warning: #fff;
+    --kds-theme-warning-alt: #fff1d6;
+    --kds-theme-on-warning-alt: #fdb733;
+    --kds-theme-warning-active: #7e5b19;
+    --kds-theme-warning-disabled: #fee2ad;
+    --kds-theme-warning-focus: #fdb733;
+    --kds-theme-warning-hover: #ca9229;
+
+    /////////////////////////
+    ///// K-T SELECTION /////
+    ////////////////////////
+
+    --kds-theme-selection: #fdb733;
+    --kds-theme-on-selection: #fff;
+    --kds-theme-selection-alt: #002444;
+    --kds-theme-on-selection-alt: #fff;
+
+    /////////////////////////
+    ///// K-T ELEVATION /////
+    /////////////////////////
+
+    // NOTE: built using `box-shadow`
+    --kds-theme-elevation-low: 0 2px 7px rgb(0 0 0 / 10%);
+    --kds-theme-elevation-medium: 0 4px 8px rgb(0 0 0 / 25%);
+    --kds-theme-elevation-high: 0 4px 18px rgb(0 0 0 / 25%);
+
+    ////////////////////
+    ///// K-T HALO /////
+    ////////////////////
+
+    --kds-theme-halo-width: 0.25rem;
+    --kds-theme-halo-offset: -0.25rem;
+    --kds-theme-halo-color: rgb(0 153 239 / 40%);
+
+    //////////////////////////
+    ///// K-T TYPOGRAPHY /////
+    //////////////////////////
+
+    // FONT FAMILY
+    --kds-theme-typography-font-family: 'Poppins', 'Helvetica Neue', helvetica, arial, sans-serif;
+
+    // DISPLAY
+    // Display L = 90px / 108px
+    --kds-theme-typography-display-l-font-size: 5.625rem;
+    --kds-theme-typography-display-l-font-weight: bold;
+    --kds-theme-typography-display-l-line-height: 120%;
+
+    // Display M = 52px / 64px
+    --kds-theme-typography-display-m-font-size: 3.25rem;
+    --kds-theme-typography-display-m-font-weight: bold;
+    --kds-theme-typography-display-m-line-height: 123%;
+
+    // Display S = 44px / 52px
+    --kds-theme-typography-display-s-font-size: 2.75rem;
+    --kds-theme-typography-display-s-font-weight: bold;
+    --kds-theme-typography-display-s-line-height: 118%;
+
+    // Display XS = 36px / 44px
+    --kds-theme-typography-display-xs-font-size: 2.25rem;
+    --kds-theme-typography-display-xs-font-weight: bold;
+    --kds-theme-typography-display-xs-line-height: 122%;
+
+    // HEADING
+    // Heading XXL = 40px / 52px
+    --kds-theme-typography-heading-xxl-font-size: 2.5rem;
+    --kds-theme-typography-heading-xxl-font-weight: 600;
+    --kds-theme-typography-heading-xxl-line-height: 130%;
+
+    // Heading XL = 36px / 44px
+    --kds-theme-typography-heading-xl-font-size: 2.25rem;
+    --kds-theme-typography-heading-xl-font-weight: 600;
+    --kds-theme-typography-heading-xl-line-height: 122%;
+
+    // Heading L = 32px / 40px
+    --kds-theme-typography-heading-l-font-size: 2rem;
+    --kds-theme-typography-heading-l-font-weight: 600;
+    --kds-theme-typography-heading-l-line-height: 125%;
+
+    // Heading M = 28px / 36px
+    --kds-theme-typography-heading-m-font-size: 1.75rem;
+    --kds-theme-typography-heading-m-font-weight: 600;
+    --kds-theme-typography-heading-m-line-height: 129%;
+
+    // Heading S = 24px / 32px
+    --kds-theme-typography-heading-s-font-size: 1.5rem;
+    --kds-theme-typography-heading-s-font-weight: 600;
+    --kds-theme-typography-heading-s-line-height: 133%;
+
+    // Heading XS = 20px / 28px
+    --kds-theme-typography-heading-xs-font-size: 1.25rem;
+    --kds-theme-typography-heading-xs-font-weight: 600;
+    --kds-theme-typography-heading-xs-line-height: 140%;
+
+    // LABEL
+    // Label L = 18px / 24px
+    --kds-theme-typography-label-l-font-size: 1.125rem;
+    --kds-theme-typography-label-l-font-weight: 500;
+    --kds-theme-typography-label-l-line-height: 133%;
+
+    // Label M = 16px / 22px
+    --kds-theme-typography-label-m-font-size: 1rem;
+    --kds-theme-typography-label-m-font-weight: 500;
+    --kds-theme-typography-label-m-line-height: 137%;
+
+    // Label S = 14px / 18px
+    --kds-theme-typography-label-s-font-size: 0.875rem;
+    --kds-theme-typography-label-s-font-weight: 500;
+    --kds-theme-typography-label-s-line-height: 129%;
+
+    // Label XS = 12px / 18px
+    --kds-theme-typography-label-xs-font-size: 0.75rem;
+    --kds-theme-typography-label-xs-font-weight: 500;
+    --kds-theme-typography-label-xs-line-height: 150%;
+
+    // Label XXS = 10px / 14px
+    --kds-theme-typography-label-xxs-font-size: 0.625rem;
+    --kds-theme-typography-label-xxs-font-weight: 500;
+    --kds-theme-typography-label-xxs-line-height: 140%;
+
+    // PARAGRAPH
+    // Paragraph L = 18px / 28px
+    --kds-theme-typography-paragraph-l-font-size: 1.125rem;
+    --kds-theme-typography-paragraph-l-font-weight: normal;
+    --kds-theme-typography-paragraph-l-line-height: 156%;
+
+    // Paragraph M = 16px / 24px
+    --kds-theme-typography-paragraph-m-font-size: 1rem;
+    --kds-theme-typography-paragraph-m-font-weight: normal;
+    --kds-theme-typography-paragraph-m-line-height: 150%;
+
+    // Paragraph S = 14px / 20px
+    --kds-theme-typography-paragraph-s-font-size: 0.875rem;
+    --kds-theme-typography-paragraph-s-font-weight: normal;
+    --kds-theme-typography-paragraph-s-line-height: 143%;
+
+    // Paragraph XS = 12px / 20px
+    --kds-theme-typography-paragraph-xs-font-size: 0.75rem;
+    --kds-theme-typography-paragraph-xs-font-weight: normal;
+    --kds-theme-typography-paragraph-xs-line-height: 167%;
+
+    /////////////////////////
+    ///// K-T SCROLLBAR /////
+    /////////////////////////
+
+    --kds-utility-scrollbar-thumb: #bfc6cc;
+    --kds-utility-scrollbar-track: transparent;
+    --kds-utility-scrollbar-width: thin;
+
+    ///////////////////////
+    ///// K-T Z-INDEX /////
+    ///////////////////////
+
+    --kds-utility-z-index-background: 1;
+    --kds-utility-z-index-side-sheet: 10;
+    --kds-utility-z-index-app-bar: 20;
+    --kds-utility-z-index-menu: 30;
+    --kds-utility-z-index-modal: 40;
+
+    ////////////////////////
+    ///// K-T PERSONAS /////
+    ////////////////////////
+
+    // Persona: Claims
+    --kds-persona-claims: #00305a;
+    --kds-persona-on-claims: #fff;
+
+    // Persona: Provider
+    --kds-persona-provider: #5f3777;
+    --kds-persona-on-provider: #fff;
+
+    ///////////////////////////////////
+    ///// MDC THEME CSS VARIABLES /////
+    ///////////////////////////////////
+
+    --mdc-typography-font-family: var(--kds-theme-typography-font-family);
+    --mdc-theme-primary: var(--kds-theme-primary);
+    --mdc-theme-on-primary: var(--kds-theme-on-primary);
+    --mdc-theme-secondary: var(--kds-theme-secondary);
+    --mdc-theme-on-secondary: var(--kds-theme-on-secondary);
+    --mdc-theme-background: var(--kds-theme-on-background);
+    --mdc-theme-surface: var(--kds-theme-surface);
+    --mdc-theme-on-surface: var(--kds-theme-on-surface);
+    --mdc-theme-error: var(--kds-theme-error);
+    --mdc-theme-on-error: var(--kds-theme-on-error);
+}
+
+@mixin kds-halo($inset: false) {
+    @if $inset {
+        box-shadow: inset 0 0 0 var(--kds-theme-halo-width) var(--kds-theme-halo-color);
+    } @else {
+        box-shadow: 0 0 0 var(--kds-theme-halo-width) var(--kds-theme-halo-color);
+    }
+}
+
+@mixin kds-scrollbar {
+    scrollbar-color: var(--kds-utility-scrollbar-thumb) var(--kds-utility-scrollbar-track);
+    scrollbar-width: var(--kds-utility-scrollbar-width);
+
+    &::-webkit-scrollbar {
+        height: 10px;
+        width: 10px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: var(--kds-utility-scrollbar-thumb);
+        border-color: var(--kds-theme-surface);
+        border-radius: 16px;
+        border-style: solid;
+        border-width: 2px;
+    }
+
+    &::-webkit-scrollbar-button {
+        display: none;
+    }
+}
+
+// NOTE: Hides element from page, keeps it out of the way of other elements, and is accessible for screen reader
+// https://css-tricks.com/comparing-various-ways-to-hide-things-in-css/#method-5-the-visually-hidden-class
+@mixin visuallyhidden {
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    height: 1px;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
+}
+
+// NOTE: media query mixin based on 10em increment check points
+// https://itnext.io/writing-media-queries-with-sass-mixins-3ea591ea3ea4
+@mixin mq($size) {
+    @if $size == 320px {
+        @media screen and (min-width: 20em) {
+            @content;
+        }
+    } @else if $size == 480px {
+        @media screen and (min-width: 30em) {
+            @content;
+        }
+    } @else if $size == 640px {
+        @media screen and (min-width: 40em) {
+            @content;
+        }
+    } @else if $size == 800px {
+        @media screen and (min-width: 50em) {
+            @content;
+        }
+    } @else if $size == 960px {
+        @media screen and (min-width: 60em) {
+            @content;
+        }
+    } @else if $size == 1120px {
+        @media screen and (min-width: 70em) {
+            @content;
+        }
+    } @else if $size == 1280px {
+        @media screen and (min-width: 80em) {
+            @content;
+        }
+    } @else if $size == 1440px {
+        @media screen and (min-width: 90em) {
+            @content;
+        }
+    } @else if $size == 1600px {
+        @media screen and (min-width: 100em) {
+            @content;
+        }
+    } @else if $size == 1760px {
+        @media screen and (min-width: 110em) {
+            @content;
+        }
+    } @else if $size == 1920px {
+        @media screen and (min-width: 120em) {
+            @content;
+        }
+    }
+
+    //////////////////////////
+    // T-SHIRT SIZES
+    //////////////////////////
+    // Small = 320px
+    // — Check = 480px
+    // Medium = 640px
+    // — Check = 800px
+    // Large =  960px
+    // — Check = 1280px
+    // Extra Large = 1440px
+    @else if $size == small {
+        @media screen and (min-width: 20em) {
+            @content;
+        }
+    } @else if $size == medium {
+        @media screen and (min-width: 40em) {
+            @content;
+        }
+    } @else if $size == large {
+        @media screen and (min-width: 60em) {
+            @content;
+        }
+    } @else if $size == x-large {
+        @media screen and (min-width: 90em) {
+            @content;
+        }
+    }
+}
+
+:root {
+    @include core-styles;
+
+    // text selection styles for mouse/pointer
+    ::selection {
+        background-color: var(--kds-theme-selection);
+        color: var(--kds-theme-on-selection);
+    }
+}

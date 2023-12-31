@@ -1,0 +1,115 @@
+@mixin core-styles {
+    /////////////////////
+    ///// K-T COLOR /////
+    /////////////////////
+
+    // K-T THEME PRIMARY
+    --kds-theme-primary: #fff;
+    --kds-theme-on-primary: #1e2225;
+    --kds-theme-primary-hover: #e6e9ec;
+    --kds-theme-primary-focus: #f2f4f6;
+    --kds-theme-primary-active: #d6dbe0;
+    --kds-theme-primary-disabled: #4c545a;
+
+    // K-T THEME BACKGROUND
+    --kds-theme-background: #1e2225;
+    --kds-theme-on-background: #f2f4f6;
+
+    // K-T THEME SURFACE
+    --kds-theme-surface: #292f34;
+    --kds-theme-on-surface: #f2f4f6;
+    --kds-theme-on-surface-disabled: #a0a9b1;
+    --kds-theme-surface-hover: #4c545a;
+    --kds-theme-surface-focus: #292f34;
+    --kds-theme-surface-active: #7e8890;
+    --kds-theme-surface-disabled: #a0a9b1;
+
+    // K-T THEME SURFACE-ALT
+    --kds-theme-surface-alt: #4c545a;
+    --kds-theme-surface-alt-hover: #7e8890;
+    --kds-theme-surface-alt-focus: #4c545a;
+    --kds-theme-surface-alt-active: #a0a9b1;
+    --kds-theme-surface-alt-disabled: #7e8890;
+
+    // K-T THEME NON-MODAL SURFACE
+    --kds-theme-non-modal-surface: rgb(242 244 246 / 90%);
+    --kds-theme-non-modal-on-surface: #1e2225;
+
+    // K-T THEME BORDER
+    --kds-theme-border-color: #4c545a;
+    --kds-theme-border-color-hover: #7e8890;
+    --kds-theme-border-color-focus: #4c545a;
+    --kds-theme-border-color-active: #bfc6cc;
+    --kds-theme-border-color-disabled: #4c545a;
+
+    // K-T THEME DIVIDER
+    --kds-theme-divider-color: #1e2225;
+
+    // K-T THEME DATA CELLS
+    --kds-theme-cell: #292f34;
+    --kds-theme-cell-alt: #363c40;
+    --kds-theme-cell-hover: #4c545a;
+    --kds-theme-cell-select: #005483;
+    --kds-theme-cell-select-hover: #0073b3;
+
+    // K-T THEME ERROR
+    --kds-theme-on-error: #5d0d2e;
+    --kds-theme-error-alt: #f1a8c6;
+    --kds-theme-on-error-alt: #a1154f;
+    --kds-theme-error-hover: #e16e9d;
+    --kds-theme-error-active: #f1a8c6;
+    --kds-theme-error-disabled: #8d003b;
+
+    // K-T THEME SUCCESS
+    --kds-theme-on-success: #3b4821;
+    --kds-theme-success-alt: #dde9c1;
+    --kds-theme-on-success-alt: #546b3c;
+    --kds-theme-success-hover: #b8d182;
+    --kds-theme-success-active: #cfe0ab;
+    --kds-theme-success-disabled: #546b3c;
+
+    // K-T THEME WARNING
+    --kds-theme-on-warning: #4c370f;
+    --kds-theme-warning-alt: #fee2ad;
+    --kds-theme-on-warning-alt: #7e5b19;
+    --kds-theme-warning-hover: #fdcb6c;
+    --kds-theme-warning-active: #fedb99;
+    --kds-theme-warning-disabled: #7e5b19;
+
+    ////////////////////////
+    ///// K-T PERSONAS /////
+    ////////////////////////
+
+    // Persona: Claims
+    --kds-persona-claims: #00538e;
+
+    // Persona: Provider
+    --kds-persona-provider: #8758a3;
+
+    /////////////////////////
+    ///// K-T ELEVATION /////
+    /////////////////////////
+
+    // NOTE: built using `box-shadow`
+    --kds-theme-elevation-low: 0 2px 7px rgb(0 0 0 / 35%);
+    --kds-theme-elevation-medium: 0 4px 8px rgb(0 0 0 / 35%);
+    --kds-theme-elevation-high: 0 4px 18px rgb(0 0 0 / 35%);
+
+    ////////////////////
+    ///// K-T HALO /////
+    ////////////////////
+
+    --kds-theme-halo-color: rgb(0 153 239 / 70%);
+
+    /////////////////////////
+    ///// K-T SCROLLBAR /////
+    /////////////////////////
+
+    --kds-utility-scrollbar-thumb: #4c545a;
+
+    /////////////////
+    //// K-T Tag ////
+    /////////////////
+
+    --kds-tag-background-color: #7e8890;
+}

@@ -1,0 +1,30 @@
+---
+
+const data = [
+  {name: 'Apple Corp', city: "Atlanta"},
+  {name: 'Bacon Corp', city: "Boise"},
+  {name: 'Corn Corp', city: "Columbus"},
+  {name: 'Donut Inc.', city: "Dartmouth"},
+  {name: 'Eggplant Industries', city: "Eagleton"},
+]
+console.log('TOMTOM: data:', data);
+---
+
+<div class='wrapper'>
+  {data.map((vendor) =>
+    <p>vendor.name</p>
+  )}
+</div>
+
+<style>
+    .wrapper {
+        margin: 10px;
+        padding: 10px;
+        background-color: #e7e398;
+        border: 2px solid black;
+        min-height: 2rem;
+        text-align: center;
+        font-size: 16px;
+        font-family: Arial, sans-serif;
+    }
+</style>

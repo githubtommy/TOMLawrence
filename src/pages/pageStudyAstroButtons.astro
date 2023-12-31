@@ -1,0 +1,23 @@
+---
+import LayoutHeader from '../layouts/LayoutHeader.astro';
+import ButtonWithStyleTagBlue from '../componentsAstro/ButtonWithStyleTagBlue.astro';
+import ButtonWithStyleTagRed from '../componentsAstro/ButtonWithStyleTagRed.astro';
+import '../styles/global.css'
+function handleClick() {
+  console.log('TOMTOM: CLICK');
+}
+---
+
+<LayoutHeader />
+<h1>Study: Astro Buttons</h1>
+<p>Astro buttons are probably not a good choice for this project. But here are a few notes:</p>
+<ul>
+  <li>Using style tags within the component file is a convenient place to put the CSS</li>
+  <li>We can put the style tag at the bottom of the page, to keep it from being obtrusive</li>
+  <li>We would probably have to use class names rather than tag names, if we want the CSS to be modular</li>
+
+
+</ul>
+<ButtonWithStyleTagBlue id='blueButton'/>
+<ButtonWithStyleTagRed id='redButton'/>
+

@@ -1,0 +1,110 @@
+# Security Scan Gitlab CI/CD YAML File
+### Perform Prisma scan
+### Perform SonarQube scan
+### Perform Veracode scan
+
+include:
+  - project: 'gitlab-templates/gitlab-pipeline-templates'
+    ref: main
+    file: '/gitlab-ci/job-templates/secure/prisma-container-scan.gitlab-ci.yml'
+
+
+stages:
+  - scan
+  - secure
+
+variables:
+  TEAM_NAME: ""
+  SONARQUBE_URL: https://mmgmt-sonar.ckp.centene.com
+  SONARQUBE_TOKEN: ""  
+  ARTIFACTORY_URL: artifactory-rco.centene.com
+  IMAGE_NAME: $TEAM_NAME-$CI_PROJECT_NAME
+  SCAN_IMAGE: ${ARTIFACTORY_URL}/${artifactory_repository_nonprod}/${IMAGE_NAME}
+  SCAN_TAG: pre-${PROJECT_VERSION}-${CI_PIPELINE_ID}_${CI_COMMIT_REF_SLUG}
+  SONARQUBE_TAG: $TEAM_NAME-$CI_PROJECT_NAME-$CI_COMMIT_BRANCH
+
+.container-scan:
+  dependencies: [container-build]
+  extends: .ContainerScan
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "PIRP*"'
+      variables:   
+        SCAN_IMAGE: ${ARTIFACTORY_URL}/${artifactory_repository_prod}/${IMAGE_NAME}
+        SCAN_TAG: ${PROJECT_VERSION}.${CI_PIPELINE_ID}
+      when: on_success
+#    - if: '($CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "master")'
+#      variables:
+#        SCAN_IMAGE: ${ARTIFACTORY_URL}/${artifactory_repository_prod}/${IMAGE_NAME}
+#        SCAN_TAG: ${PROJECT_VERSION}
+#      when: on_success
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "PIRP*"'
+      when: on_success
+#  allow_failure: false
+  
+.sonarqube-scan:
+  stage: scan
+  dependencies: []
+  image:
+    name: artifactory-rco.centene.com/pots_docker_production_virtual_rco/centene/gitlab-sonar-scanner:latest
+    entrypoint: [""]
+  script:
+    - sonar-scanner -Dsonar.projectKey=$SONARQUBE_TAG -Dsonar.sources=. -Dsonar.host.url=${SONARQUBE_URL} -Dsonar.login=${SONARQUBE_TOKEN}
+  allow_failure: true
+  rules:
+    - if: '($CI_COMMIT_BRANCH == "PIRP*") || ($CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "PIRP*")'
+#      variables:   
+#        SONARQUBE_TAG: $TEAM_NAME-$CI_PROJECT_NAME-$CI_COMMIT_BRANCH
+#    - when:
+#      variables:   
+#        SONARQUBE_TAG: $TEAM_NAME-$CI_PROJECT_NAME-CI_COMMIT_REF_SLUG
+
+.sonarqube-report:
+  image:
+    name: artifactory-rco.centene.com/mmdo_docker_nonprod_local_rco/sonarqube-reporter/sonarqube-reporter:0.0.16
+    entrypoint: [""]
+  stage: build
+  dependencies:
+    - sonarqube-scan
+  script: 
+    - |
+        echo $TEAM_NAME-$CI_PROJECT_NAME-$CI_COMMIT_BRANCH > key.txt
+        python3 /sonarqube_reporter
+  artifacts:
+    when : always
+    paths:
+      - $CI_PROJECT_DIR/sonarqube.xml
+    reports:
+      junit: $CI_PROJECT_DIR/sonarqube.xml
+  rules:
+    - if: '($CI_COMMIT_BRANCH == "PIRP*") || ($CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "PIRP*")'
+      when: on_success
+
+.veracode-scan:
+  stage: scan
+  dependencies: []
+  image:
+    name: veracode/api-wrapper-java:latest
+  before_script:
+    - zip -r code.zip ${CI_PROJECT_DIR}
+  #  - export CI_JOB_TIME=$(date "+%m")
+    - export CI_JOB_TIME=11
+  script:
+    - java -jar /opt/veracode/api-wrapper.jar
+      -vid ${VERACODE_API_ID}
+      -vkey ${VERACODE_API_SECRET}
+      -action UploadAndScan
+      -createprofile true
+      -teams ${TEAM_NAME}
+      -criticality High
+      -sandboxname ${TEAM_NAME}-${CI_JOB_TIME}
+      -createsandbox true
+      -deleteincompletescan true
+      -include code.zip
+      -maxretrycount 5
+      -appname ${TEAM_NAME}-${CI_PROJECT_NAME}
+      -version ${TEAM_NAME}-${CI_PROJECT_NAME}-${CI_COMMIT_REF_NAME}-${CI_PIPELINE_ID}
+      -filepath code.zip
+  allow_failure: true
+  rules:
+    - if: '($CI_COMMIT_BRANCH == "PIRP*")'
+      when: on_success

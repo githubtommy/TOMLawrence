@@ -1,0 +1,66 @@
+// default path to Poppins files
+$font-path: '' !default;
+
+@font-face {
+    font-display: swap;
+    font-family: 'Poppins';
+    font-style: italic;
+    font-weight: normal;
+    src: local('Poppins'), url('#{$font-path}Poppins-Italic.ttf') format('truetype');
+}
+
+@font-face {
+    font-display: swap;
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Poppins'), url('#{$font-path}Poppins-Regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-display: swap;
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 500;
+    src: local('Poppins'), url('#{$font-path}Poppins-Medium.ttf') format('truetype');
+}
+
+@font-face {
+    font-display: swap;
+    font-family: 'Poppins';
+    font-style: italic;
+    font-weight: 500;
+    src: local('Poppins'), url('#{$font-path}Poppins-MediumItalic.ttf') format('truetype');
+}
+
+@font-face {
+    font-display: swap;
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 600;
+    src: local('Poppins'), url('#{$font-path}Poppins-SemiBold.ttf') format('truetype');
+}
+
+@font-face {
+    font-display: swap;
+    font-family: 'Poppins';
+    font-style: italic;
+    font-weight: 600;
+    src: local('Poppins'), url('#{$font-path}Poppins-SemiBoldItalic.ttf') format('truetype');
+}
+
+@font-face {
+    font-display: swap;
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: bold;
+    src: local('Poppins'), url('#{$font-path}Poppins-Bold.ttf') format('truetype');
+}
+
+@font-face {
+    font-display: swap;
+    font-family: 'Poppins';
+    font-style: italic;
+    font-weight: bold;
+    src: local('Poppins'), url('#{$font-path}Poppins-BoldItalic.ttf') format('truetype');
+}
